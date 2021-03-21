@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KinoLab - Главная</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo/logo.ico">
+    <link rel="stylesheet" href="/css/null.css">
+    <link rel="stylesheet" href="/css/App.css">
+    <script defer src="/js/slider.js"></script>
+    <script defer src='/js/dropDown_forPhone.js'></script>    
+    <script defer src="/js/filters.js"></script>
+    <script defer src='/js/request_films.js'></script>
+</head>
+
+<body>
+    
+    {{ template "header.html" }}
+
+    <main class="main container">
+
+        <!-- Начало слайдера -->
+        <div class="slider-wrapper">
+            <div class="slider">
+                <div class="slider-list">
+                  <div class="slider-track">
+
+                    {{ range .Banners }}
+                    <div class="slide active" data-slide-index="1"><a href="#">
+                        <h2 class="slide-title">{{ .FilmName }}</h2>
+                        <img src="{{ .BannerURL }}" class="slide-img">
+                    </a></div>
+                    {{ end }}
+
+                  </div>
+                </div>
+                <div class="slider-arrows">
+                  <button type="button" class="prev__btn">
+                    <img src="img/down.svg"></button>
+                  <button type="button" class="next__btn">
+                      <img src="img/down.svg">
+                  </button>
+                </div>
+                <div class="slider-pagination">
+                    <span class="slider-pagination-item active"></span>
+                    <span class="slider-pagination-item"></span>
+                    <span class="slider-pagination-item"></span>
+                    <span class="slider-pagination-item"></span>
+                    <span class="slider-pagination-item"></span>
+                </div>
+              </div>
+        </div>
+        <!-- Конец слайдера -->
+
+
+        
+        <form class="main__form">
+            <div class="main__search">
+                <input type="text" class="main__search_input">
+            </div>
+
+            <section class="main__filter">
+
+                <div class="main__filter_choice" data-type="genre">
+                    <h3 class="main__filter_name">Жанры</h3>
+                    <div class="main__filter_wrapper">
+                        <ul class="main__filter_items">
+
+                            {{ range .Genres }}
+                            <li class="main__filter_btn">
+                                <label class="main__filter_item" for="genre_{{ .ID }}">
+                                    <input type="checkbox" id="genre_{{ .ID }}" value="{{ .GenreName }}">
+                                    <span class="main__filter_checkbox"></span>
+                                    <p class="main__filter_title">{{ .GenreName }}</p>
+                                </label>
+                            </li>
+                            {{ end }}
+
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="main__filter_choice" data-type="director">
+                    <h3 class="main__filter_name">Режиссёры</h3>
+                    <div class="main__filter_wrapper">
+                        <ul class="main__filter_items">
+
+                            {{ range .Authors }}
+                            <li class="main__filter_btn">
+                                <label class="main__filter_item" for="author_{{.ID}}">
+                                    <input type="checkbox" id="author_{{.ID}}" value="{{ .FName }} {{ .LName}}">
+                                    <span class="main__filter_checkbox"></span>
+                                    <p class="main__filter_title">{{ .FName }} {{ .LName}}</p>
+                                </label>
+                            </li>
+                            {{ end }}
+
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="main__filter_choice" data-type="actor">
+                    <h3 class="main__filter_name">Актёры</h3>
+                    <div class="main__filter_wrapper">
+                        <ul class="main__filter_items">
+
+                            {{ range .Actors }}
+                            <li class="main__filter_btn">
+                                <label class="main__filter_item" for="actor_{{.ID}}">
+                                    <input type="checkbox" id="actor_{{.ID}}" value="{{ .FName }} {{ .LName}}">
+                                    <span class="main__filter_checkbox"></span>
+                                    <p class="main__filter_title">{{ .FName }} {{ .LName}}</p>
+                                </label>
+                            </li>
+                            {{ end }}
+
+                        </ul>
+                    </div>
+                    </ul>
+                </div>
+
+
+                <div class="main__filter_choice" data-type="year">
+                    <h3 class="main__filter_name">Год</h3>
+                    <div class="main__filter_wrapper">
+                        <ul class="main__filter_items">
+
+                            {{ range .Years }}
+                            <li class="main__filter_btn">
+                                <label class="main__filter_item" for="year_{{ .ID }}">
+                                    <input type="checkbox" id="year_{{ .ID }}" value="{{ .FilmYear }}">
+                                    <span class="main__filter_checkbox"></span>
+                                    <p class="main__filter_title">{{ .FilmYear }}</p>
+                                </label>
+                            </li>
+                            {{ end }}
+
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+            <div class="filter__under-wrapper">
+                <ul class="filter__tags">
+                </ul>
+                <button class="filter__btn btn">Применить</button>
+            </div>
+
+
+        </form>
+        <!-- Начало Списка фильмов -->
+        <div class="wrapper__preview">   
+
+            {{ range .Films }}
+            <div class="preview">
+                <a href="/film/{{.ID}}" class="card__wrapper">
+                    <div class="preview__info">                        
+                        <img src="{{.PosterURL}}" class="card__pic">
+                        <div class="card__rating">
+                            <p>5.0</p>
+                        </div>
+                    </div>
+                    <div class="preview__popup">
+                        <h4 class="preview__popup-title">{{ .FilmName }}</h4>
+                        <h5 class="preview__popup-genre">
+                            {{ range .Genres }}
+                                {{.}}
+                            {{ end }}
+                        </h5>
+                    </div>
+                </a>
+            </div>
+            {{ end }}
+
+        </div>
+        <!-- Конец Списка фильмов -->
+        <button id="more-btn" class="btn">Ещё</button>
+    </main>
+
+    {{ template "footer.html" }}
+
+</body>
+
+</html>
