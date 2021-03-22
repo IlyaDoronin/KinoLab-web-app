@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/yeahyeahcore/KinoLab-web-app/model"
+	"github.com/yeahyeahcore/KinoLab-web-app/conf"
 )
 
 var (
@@ -31,6 +32,8 @@ func index(c *gin.Context) {
 		"Genres":  genres["genres"],
 		"Films":   films["films"],
 		"Banners": banners["banners"],
+		"Host":      conf.Api.Host,
+		"Port":      conf.Api.Port,
 	})
 }
 
@@ -56,5 +59,7 @@ func film(c *gin.Context) {
 		"Authors":     film["film"].Authors,
 		"Actors":      film["film"].Actors,
 		"Genres":      film["film"].Genres,
+		"Host":      conf.Api.Host,
+		"Port":      conf.Api.Port,
 	})
 }

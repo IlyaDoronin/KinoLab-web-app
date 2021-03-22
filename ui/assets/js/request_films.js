@@ -2,6 +2,17 @@ function $(el){
     return document.querySelector(el)
 }
 
+// Колличество страниц с фильмами 
+let pageCount
+fetch(`http://${HOST}/pageCount?table=film`, {
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        "Access-Control-Allow-Origin": "*"
+    }).then( response =>  response.json() )
+    .then(count => pageCount = count.page_count )
+
+// текущая страница для загрузки комментариев(комменты в api по страницам)
+let filmPage = 1
+
 btn = $('#more-btn')
 previewList = $('.wrapper__preview')
 
@@ -9,20 +20,23 @@ previewList = $('.wrapper__preview')
 function getFilms(){
     // Подсчёт загруженных фильмов для правильного ajax запроса
     number = document.querySelectorAll('.preview').length
-    URL = 'https://jsonplaceholder.typicode.com/photos/'
+    URL = `http://${HOST}/website/films?page=${filmPage}`
 
-    fetch(URL, {
+    fetch(URL, { 
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
-        }).then(response => {
-            if (response.ok)
+    }).then(response => {
+            if (response.ok){    
+                if( pageCount == filmPage){
+                    btn.style.display = 'none'
+                }
+                filmPage++
                 return response.json()
+            }
             else
                 console.error('Ошибка получения данных');
-        }).then( films => {
-            // Подсчёт, сколько фильмов загружено, что бы парсить следующие 8 штук
-            films = films.slice(number - 9, --number)
-            films.map( film => generatePreview(film))
+        }).then( films => {            
+            films.films.map( film => generatePreview(film))
         })
 
 }
@@ -32,16 +46,13 @@ function generatePreview(film){
     let preview = document.createElement('div')
     preview.classList.add('preview')
     preview.innerHTML = `
-    <a href="${film.url}" class="card__wrapper">
+    <a href="/film/${film.ID}" class="card__wrapper">
     <div class="preview__info">                        
-        <img src="${film.url}" class="card__pic">
-        <div class="card__rating">
-            <p>${film.id}</p>
-        </div>
+        <img src="${film.PosterURL}" class="card__pic">
     </div>
     <div class="preview__popup">
-        <h4 class="preview__popup-title">${film.title}</h4>
-        <h5 class="preview__popup-genre">${film.thumbnailUrl}</h5>
+        <h4 class="preview__popup-title">${film.FilmName}</h4>
+        <h5 class="preview__popup-genre">${film.Genres}</h5>
     </div>
 </a>
     `
@@ -49,5 +60,7 @@ function generatePreview(film){
 }
 
 btn.addEventListener('click', () => {
-    getFilms()
+    getFilms(filmPage)
 })
+
+getFilms(filmPage)

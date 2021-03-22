@@ -99,23 +99,14 @@
                 <button class="btn" type="submit">Отправить</button>
             </form>
             <!-- Блок вывода существующий комментариев -->
-            <div class="comments">
-                <div class="comment">
-                    <div class="comment__img_wrapper">
-                        <img src="/img/comment_img.png" class="comment__img">
-                    </div>
-                    <div class="comment__name_wrapper">
-                        <p class="comment__name">Михаил Александровичg</p>
-                    </div>
-                    <time class="comment__time">19.03.2021</time>
-                    <div class="comment__text_wrapper">
-                        <p class="comment__text">Классный фильм, мне понравился!</p>
-                    </div>
-                </div>
-            </section>
+            <div class="comments"></div>
         </div>
     </main>
     <button id="more-btn" class="btn">Ещё</button>
+
+    <script>
+        const HOST = "{{.Host}}:{{.Port}}"
+    </script>
 
     {{ template "footer.html" }}
 

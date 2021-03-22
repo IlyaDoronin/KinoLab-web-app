@@ -47,7 +47,6 @@ function changeSlide(forward) {
         else {
             slides[active].classList.remove("active"); // Удаляем класс active у активного слайда
             slides[++active].classList.add("active"); // Добавляем класс active следующему слайду
-            console.log(slideWidth)           
             sliderTrack.style.transform = `translate3D(-${slideWidth * active}px, 0, 0)`; // Умножаем длину слайда на его номер и двагаем контейнер со слайдами на получившееся значение
             paginations[active - 1].classList.remove("active"); // Удаляем класс active у нынешней точки
             paginations[active].classList.add("active"); // Добавляем класс active слудующей точке

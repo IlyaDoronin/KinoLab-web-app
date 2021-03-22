@@ -155,32 +155,15 @@
         <!-- Начало Списка фильмов -->
         <div class="wrapper__preview">   
 
-            {{ range .Films }}
-            <div class="preview">
-                <a href="/film/{{.ID}}" class="card__wrapper">
-                    <div class="preview__info">                        
-                        <img src="{{.PosterURL}}" class="card__pic">
-                        <div class="card__rating">
-                            <p>5.0</p>
-                        </div>
-                    </div>
-                    <div class="preview__popup">
-                        <h4 class="preview__popup-title">{{ .FilmName }}</h4>
-                        <h5 class="preview__popup-genre">
-                            {{ range .Genres }}
-                                {{.}}
-                            {{ end }}
-                        </h5>
-                    </div>
-                </a>
-            </div>
-            {{ end }}
-
         </div>
         <!-- Конец Списка фильмов -->
         <button id="more-btn" class="btn">Ещё</button>
     </main>
 
+    <script>
+        const HOST = "{{.Host}}:{{.Port}}"
+    </script>
+    
     {{ template "footer.html" }}
 
 </body>

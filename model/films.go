@@ -41,7 +41,7 @@ func (f *Films) GetAllYears() map[string][]Year {
 func (f *Films) Get() map[string][]Films {
 	var films map[string][]Films
 
-	r, err := http.Get("http://localhost:5500/website/films?page=1")
+	r, err := http.Get(fmt.Sprintf("http://%s:%s/website/films?page=1", conf.Api.Host, conf.Api.Port))
 	if err != nil {
 		fmt.Println(err)
 	}
