@@ -14,10 +14,8 @@ commentsList = $('.comments')
 
 // Ajax запрос новых комментов
 function getComments(){
-    // Подсчёт загруженных комментов для правильного ajax запроса
-    let commentsCount = commentsList.querySelectorAll('.comment').length
     let URL = `http://${HOST}/website/comments?page=${commentPage}&id=${FILM_ID}`
-
+    
     fetch(URL, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -28,10 +26,11 @@ function getComments(){
             }
             else
                 console.error('Ошибка получения данных');
-        }).then( comments => {    
-            console.log(comments.film_comments.length)
-                                
-            comments.film_comments.map( comment => generateComment(comment))            
+        }).then( comments => {   
+            comments = comments.film_comments
+            if (comments.length < 1)
+                $('#more-btn').style.display = 'none'                                   
+            comments.map( comment => generateComment(comment))            
         })
 
 }

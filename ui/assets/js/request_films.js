@@ -28,18 +28,15 @@ function getFilms(){
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     }).then(response => {
-            if (response.ok){    
-
-                // if( pageCount == filmPage){
-                //     btn.style.display = 'none'
-                // }
-
+            if (response.ok){ 
                 filmPage++
                 return response.json()
             }
             else
                 console.error('Ошибка получения данных');
-        }).then( films => {            
+        }).then( films => {  
+            if (films.films.length < 1)
+                $('#more-btn').style.display = 'none'
             films.films.map( film => generatePreview(film))
         })
 
