@@ -2,7 +2,7 @@ package server
 
 import (
 	"strconv"
-
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/yeahyeahcore/KinoLab-web-app/model"
 	"github.com/yeahyeahcore/KinoLab-web-app/conf"
@@ -24,6 +24,9 @@ func index(c *gin.Context) {
 	genres := GenreObj.GetAll()
 	films := FilmsObj.Get()
 	banners := BannerObj.GetAll()
+
+	fmt.Println(conf.Api.Host)
+	fmt.Println(conf.Api.Port)
 
 	c.HTML(200, "index.html", gin.H{
 		"Actors":  actors["actors"],

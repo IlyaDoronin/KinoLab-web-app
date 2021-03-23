@@ -23,12 +23,14 @@ function getComments(){
         headers: { 'Content-Type': 'application/json' }
         }).then(response => {
             if (response.ok){
-                commentPage++
+                commentPage++           
                 return response.json()
             }
             else
                 console.error('Ошибка получения данных');
-        }).then( comments => {                        
+        }).then( comments => {    
+            console.log(comments.film_comments.length)
+                                
             comments.film_comments.map( comment => generateComment(comment))            
         })
 

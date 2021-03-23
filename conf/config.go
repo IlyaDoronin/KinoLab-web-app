@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"fmt"
 )
 
 var cfg conf
@@ -28,4 +29,6 @@ func Load(path string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println(string(data))
 }

@@ -51,4 +51,5 @@ form.addEventListener('submit', e => {
         </div>
     `
     commentsList.prepend(commentElement)
+    form.name.value = form.text.value = ''
 })
