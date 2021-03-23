@@ -2,13 +2,15 @@ function $(el){
     return document.querySelector(el)
 }
 
+
 // Колличество страниц с фильмами 
-let pageCount
-fetch(`http://${HOST}/pageCount?table=film`, {
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        "Access-Control-Allow-Origin": "*"
-    }).then( response =>  response.json() )
-    .then(count => pageCount = count.page_count )
+// let pageCount
+// fetch(`http://${HOST}/pageCount?table=film`, {
+//         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+//         "Access-Control-Allow-Origin": "*"
+//     }).then( response =>  response.json() )
+//     .then(count => pageCount = count.page_count )
+
 
 // текущая страница для загрузки комментариев(комменты в api по страницам)
 let filmPage = 1
@@ -27,9 +29,11 @@ function getFilms(){
         headers: { 'Content-Type': 'application/json' }
     }).then(response => {
             if (response.ok){    
-                if( pageCount == filmPage){
-                    btn.style.display = 'none'
-                }
+
+                // if( pageCount == filmPage){
+                //     btn.style.display = 'none'
+                // }
+
                 filmPage++
                 return response.json()
             }

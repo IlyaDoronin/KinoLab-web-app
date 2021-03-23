@@ -13,10 +13,10 @@ btn = $('#more-btn')
 commentsList = $('.comments')
 
 // Ajax запрос новых комментов
-function getComments(page){
+function getComments(){
     // Подсчёт загруженных комментов для правильного ajax запроса
     let commentsCount = commentsList.querySelectorAll('.comment').length
-    URL = `http://${HOST}/website/comments?page=${commentPage}&id=${FILM_ID}`
+    let URL = `http://${HOST}/website/comments?page=${commentPage}&id=${FILM_ID}`
 
     fetch(URL, {
         method: 'GET',
@@ -57,4 +57,4 @@ btn.addEventListener('click', () => {
     getComments()
 })
 
-getComments(commentPage)
+getComments()

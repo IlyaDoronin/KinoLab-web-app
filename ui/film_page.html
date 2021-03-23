@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/App.css">
     <script defer src="/js/player.js"></script>
     <script defer src="/js/request_comments.js"></script>
+    <script defer src="/js/post_comments.js"></script>
 </head>
 
 <body>
@@ -86,7 +87,7 @@
                 </div>
             </div>
             <!-- Блок создания комментариев -->
-            <form method="POST" class="fields__wrapper">
+            <form method="POST" class="fields__wrapper" id="form">
                 <div class="field">
                     <p class="field__title">Имя</p>
                     <input name="name" type="text" class="input">
@@ -96,7 +97,7 @@
                     <p class="field__title">Комментарий</p>
                     <textarea name="text" type="text" class="textarea"></textarea>
                 </div>
-                <button class="btn" type="submit">Отправить</button>
+                <button class="btn" type="submit" id="send-btn">Отправить</button>
             </form>
             <!-- Блок вывода существующий комментариев -->
             <div class="comments"></div>
