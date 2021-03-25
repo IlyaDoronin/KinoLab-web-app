@@ -48,14 +48,14 @@ function generatePreview(film){
     preview.classList.add('preview')
     preview.innerHTML = `
     <a href="/film/${film.ID}" class="card__wrapper">
-    <div class="preview__info">                        
-        <img src="${film.PosterURL}" class="card__pic">
-    </div>
-    <div class="preview__popup">
-        <h4 class="preview__popup-title">${film.FilmName}</h4>
-        <h5 class="preview__popup-genre">${film.Genres}</h5>
-    </div>
-</a>
+        <div class="preview__info">                        
+            <img src="${film.PosterURL}" class="card__pic">
+        </div>
+        <div class="preview__popup">
+            <h4 class="preview__popup-title">${film.FilmName}</h4>
+            <h5 class="preview__popup-genre">${film.Genres}</h5>
+        </div>
+    </a >
     `
     previewList.append(preview)
 }

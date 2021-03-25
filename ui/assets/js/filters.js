@@ -47,24 +47,45 @@ function removeElem(context) {
 }
 // Конец выбора параметров( choice )
 
+// Ajax запрос по фильтру 
+function sendFilters(filters){
+    fetch(`http://${HOST}/website/filter`, { 
+        method: 'POST',
+        body: filters
+    }).then(response => {
+            return response.json()
+    }).then( filters => {  
+        previewList.innerHTML = ''
+        $('#more-btn').style.display = 'none'
+        filters.map(filter => generatePreview(filter))
+    })
+}
+
 // Поиск по параметрам
 let filters = {
-    text: '',
+    search: '',
     genres: [],
-    directors: [],
+    authors: [],
     actors: [],
     years: [],
 };
 function takeFiltes() {
+    filters = {
+        search: '',
+        genres: [],
+        authors: [],
+        actors: [],
+        years: [],
+    };
     // Очитка объедка от старых фильтров
-    filters.text = search.value
+    filters.search = search.value
     tagsList.querySelectorAll(".filter__tags-item").forEach((item) => {
         switch (item.getAttribute("data-type")) {
             case "genre":
                 filters.genres.push(item.querySelector("p").innerHTML);
                 break;
-            case "director":
-                filters.directors.push(item.querySelector("p").innerHTML);
+            case "authors":
+                filters.authors.push(item.querySelector("p").innerHTML);
                 break;
             case "actor":
                 filters.actors.push(item.querySelector("p").innerHTML);
@@ -75,12 +96,11 @@ function takeFiltes() {
         }
     });
 
-    console.log(filters);
+    sendFilters(JSON.stringify(filters));
 }
 
 document.querySelector(".filter__btn").addEventListener("click", (e) => {
     e.preventDefault();
     takeFiltes();
 });
-
 

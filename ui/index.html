@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="/css/App.css">
     <script defer src="/js/slider.js"></script>
     <script defer src='/js/dropDown_forPhone.js'></script>    
-    <script defer src="/js/filters.js"></script>
     <script defer src='/js/request_films.js'></script>
+    <script defer src="/js/filters.js"></script>
 </head>
 
 <body>
@@ -82,7 +82,7 @@
                 </div>
 
 
-                <div class="main__filter_choice" data-type="director">
+                <div class="main__filter_choice" data-type="authors">
                     <h3 class="main__filter_name">Режиссёры</h3>
                     <div class="main__filter_wrapper">
                         <ul class="main__filter_items">
@@ -92,7 +92,7 @@
                                 <label class="main__filter_item" for="author_{{.ID}}">
                                     <input type="checkbox" id="author_{{.ID}}" value="{{ .FName }} {{ .LName}}">
                                     <span class="main__filter_checkbox"></span>
-                                    <p class="main__filter_title">{{ .FName }} {{ .LName}}</p>
+                                    <p class="main__filter_title">{{.LName}} {{.FName }}</p>
                                 </label>
                             </li>
                             {{ end }}
@@ -112,7 +112,7 @@
                                 <label class="main__filter_item" for="actor_{{.ID}}">
                                     <input type="checkbox" id="actor_{{.ID}}" value="{{ .FName }} {{ .LName}}">
                                     <span class="main__filter_checkbox"></span>
-                                    <p class="main__filter_title">{{ .FName }} {{ .LName}}</p>
+                                    <p class="main__filter_title">{{.LName}} {{.FName }}</p>
                                 </label>
                             </li>
                             {{ end }}
