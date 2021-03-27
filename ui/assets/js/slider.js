@@ -91,3 +91,8 @@ document.querySelector(".next__btn").addEventListener("click", function () {
     changeSlide(true);
 });
 // Конец слайдера
+
+let idx = 1
+document.querySelectorAll('.slide').forEach(slide => {
+    slide.setAttribute('data-slide-index', idx++)
+})
